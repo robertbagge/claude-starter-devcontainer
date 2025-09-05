@@ -28,9 +28,6 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
   direnv \
   && apt-get clean && rm -rf /var/lib/apt/lists/*
 
-# Install markdownlint-cli2
-RUN npm install -g markdownlint-cli2
-
 # Set up locale to fix warnings
 RUN sed -i '/en_US.UTF-8/s/^# //g' /etc/locale.gen && locale-gen
 ENV LANG=en_US.UTF-8
@@ -106,7 +103,8 @@ RUN bash -c '. "$HOME/.asdf/asdf.sh" && \
   asdf plugin add ruby https://github.com/asdf-vm/asdf-ruby.git && \
   asdf plugin add bundler https://github.com/jonathanmorley/asdf-bundler.git && \
   asdf plugin add terraform https://github.com/asdf-community/asdf-hashicorp.git && \
-  asdf plugin add lychee https://github.com/robertbagge/asdf-lychee.git'
+  asdf plugin add lychee https://github.com/robertbagge/asdf-lychee.git && \
+  asdf plugin add markdownlint-cli2 https://github.com/paulo-ferraz-oliveira/asdf-markdownlint-cli2.git'
 
 # Copy .tool-versions and install all tools
 COPY --chown=node:node .tool-versions /home/node/.tool-versions
